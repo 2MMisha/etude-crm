@@ -2,6 +2,7 @@ import { z } from "zod";
 import { dateStringSchema, monthStringSchema } from "./common";
 
 export const lessonStatusSchema = z.enum(["held", "lateCancel", "cancelledInTime", "cancelledByStudio"]);
+export type LessonStatus = z.infer<typeof lessonStatusSchema>;
 
 export const lessonParticipantSchema = z.object({
   studentId: z.string(),

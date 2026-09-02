@@ -5,3 +5,5 @@ export * from "./lessonCharge";
 export * from "./balance";
 export * from "./payroll";
 export * from "./enrollment";
+export * from "./closeMonth";
+export * from "./recalcBalances";

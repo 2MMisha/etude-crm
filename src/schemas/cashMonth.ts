@@ -2,6 +2,7 @@ import { z } from "zod";
 import { dateStringSchema, monthStringSchema } from "./common";
 
 export const cashOperationTypeSchema = z.enum(["topup", "refund", "otherCharge", "adjustPlus", "adjustMinus"]);
+export type CashOperationType = z.infer<typeof cashOperationTypeSchema>;
 
 export const cashOperationSchema = z.object({
   id: z.string(),

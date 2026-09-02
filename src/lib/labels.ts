@@ -10,6 +10,19 @@ export const STUDENT_STATUS_LABEL: Record<string, string> = {
 };
 export const SEX_LABEL: Record<string, string> = { M: "М", F: "Ж" };
 export const BILLING_LABEL: Record<string, string> = { monthly: "Фикс за месяц", perLesson: "За занятие" };
+export const CASH_OPERATION_TYPE_LABEL: Record<string, string> = {
+  topup: "Пополнение",
+  refund: "Возврат",
+  otherCharge: "Прочее списание",
+  adjustPlus: "Корректировка +",
+  adjustMinus: "Корректировка −",
+};
+export const LESSON_STATUS_LABEL: Record<string, string> = {
+  held: "Состоялась",
+  lateCancel: "Поздняя отмена",
+  cancelledInTime: "Отменена вовремя",
+  cancelledByStudio: "Отменена студией",
+};
 export const WEEKDAY_LABEL: Record<string, string> = {
   Mon: "Пн",
   Tue: "Вт",

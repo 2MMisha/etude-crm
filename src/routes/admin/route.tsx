@@ -30,9 +30,11 @@ const NAV_ITEMS = [
 function AdminLayout() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <AppHeader />
+      <div className="print:hidden">
+        <AppHeader />
+      </div>
       <div className="flex">
-        <nav className="w-48 shrink-0 border-r border-gray-200 bg-white p-3">
+        <nav className="w-48 shrink-0 border-r border-gray-200 bg-white p-3 print:hidden">
           <ul className="space-y-1 text-sm">
             {NAV_ITEMS.map((item) => (
               <li key={item.to}>
