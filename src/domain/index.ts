@@ -4,3 +4,4 @@ export * from "./groupCharge";
 export * from "./lessonCharge";
 export * from "./balance";
 export * from "./payroll";
+export * from "./enrollment";

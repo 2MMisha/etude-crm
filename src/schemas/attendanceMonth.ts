@@ -2,6 +2,7 @@ import { z } from "zod";
 import { dateStringSchema, isoTimestampSchema, monthStringSchema } from "./common";
 
 export const attendanceMarkSchema = z.enum(["present", "absent", "makeup", "cancelledByStudio"]);
+export type AttendanceMark = z.infer<typeof attendanceMarkSchema>;
 
 export const attendanceSessionSchema = z.object({
   id: z.string(),
