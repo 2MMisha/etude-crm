@@ -124,10 +124,3 @@ export async function putJsonFile<T>(
 ): Promise<PutFileResult> {
   return putFile(ref, path, JSON.stringify(data, null, 2) + "\n", sha, message);
 }
-
-/** Probes read access to a repo — used at login to fail fast on a bad/expired/wrong-scope PAT (§2.2, §8). */
-export async function canReadRepo(ref: RepoRef): Promise<boolean> {
-  const url = `${API_BASE}/repos/${ref.owner}/${ref.repo}`;
-  const response = await fetch(url, { headers: authHeaders(ref.token) });
-  return response.ok;
-}

@@ -1,5 +1,6 @@
 export * from "./common";
 export * from "./settings";
+export * from "./user";
 export * from "./client";
 export * from "./student";
 export * from "./group";

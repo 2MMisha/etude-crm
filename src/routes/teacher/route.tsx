@@ -1,12 +1,12 @@
 import { createFileRoute, Link, Outlet, redirect } from "@tanstack/react-router";
-import { loadAuth } from "@/lib/auth/tokenStorage";
+import { loadSession } from "@/lib/auth/tokenStorage";
 import { AppHeader } from "@/components/AppHeader";
 
 export const Route = createFileRoute("/teacher")({
   beforeLoad: () => {
-    const auth = loadAuth();
-    if (!auth) throw redirect({ to: "/login" });
-    if (auth.role !== "teacher") throw redirect({ to: "/admin" });
+    const session = loadSession();
+    if (!session) throw redirect({ to: "/login" });
+    if (session.role !== "teacher") throw redirect({ to: "/admin" });
   },
   component: TeacherLayout,
 });

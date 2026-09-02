@@ -1,12 +1,12 @@
 import { createFileRoute, Link, Outlet, redirect } from "@tanstack/react-router";
-import { loadAuth } from "@/lib/auth/tokenStorage";
+import { loadSession } from "@/lib/auth/tokenStorage";
 import { AppHeader } from "@/components/AppHeader";
 
 export const Route = createFileRoute("/admin")({
   beforeLoad: () => {
-    const auth = loadAuth();
-    if (!auth) throw redirect({ to: "/login" });
-    if (auth.role !== "admin") throw redirect({ to: "/teacher" });
+    const session = loadSession();
+    if (!session) throw redirect({ to: "/login" });
+    if (session.role !== "admin") throw redirect({ to: "/teacher" });
   },
   component: AdminLayout,
 });
@@ -23,6 +23,7 @@ const NAV_ITEMS = [
   { to: "/admin/charges", label: "Начисления" },
   { to: "/admin/payroll", label: "Зарплата" },
   { to: "/admin/leads", label: "Лиды" },
+  { to: "/admin/users", label: "Пользователи" },
   { to: "/admin/settings", label: "Настройки" },
 ] as const;
 

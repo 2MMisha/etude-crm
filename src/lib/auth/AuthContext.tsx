@@ -1,32 +1,32 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
-import { clearAuth, loadAuth, saveAuth, type Role, type StoredAuth } from "./tokenStorage";
+import { clearSession, loadSession, saveSession, type Role, type Session } from "./tokenStorage";
 
 interface AuthContextValue {
-  auth: StoredAuth | null;
+  session: Session | null;
   role: Role | null;
-  login: (auth: StoredAuth) => void;
+  login: (session: Session) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [auth, setAuth] = useState<StoredAuth | null>(() => loadAuth());
+  const [session, setSession] = useState<Session | null>(() => loadSession());
 
   const value = useMemo<AuthContextValue>(
     () => ({
-      auth,
-      role: auth?.role ?? null,
-      login: (nextAuth) => {
-        saveAuth(nextAuth);
-        setAuth(nextAuth);
+      session,
+      role: session?.role ?? null,
+      login: (nextSession) => {
+        saveSession(nextSession);
+        setSession(nextSession);
       },
       logout: () => {
-        clearAuth();
-        setAuth(null);
+        clearSession();
+        setSession(null);
       },
     }),
-    [auth],
+    [session],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

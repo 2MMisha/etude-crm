@@ -26,6 +26,8 @@ jobs:
       - run: npm ci
       - run: npm run test
       - run: npm run build
+        env:
+          VITE_GITHUB_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
