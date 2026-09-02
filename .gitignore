@@ -9,3 +9,6 @@ dist-ssr
 .env.local
 
 src/routeTree.gen.ts
+
+# Real client/student PII from the import script — never belongs in the public app repo.
+/import-output/

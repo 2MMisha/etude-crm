@@ -1,7 +1,9 @@
 import { z } from "zod";
 import { dateStringSchema } from "./common";
 
-export const studentStatusSchema = z.enum(["active", "paused", "left"]);
+// "trial" added per the studio's actual reference list (Настройки!Статус ученика) —
+// broader than the client status enum, since a student can be mid-trial before enrolling.
+export const studentStatusSchema = z.enum(["trial", "active", "paused", "left"]);
 export const sexSchema = z.enum(["F", "M"]);
 
 export const studentSchema = z.object({
