@@ -124,3 +124,29 @@ export async function putJsonFile<T>(
 ): Promise<PutFileResult> {
   return putFile(ref, path, JSON.stringify(data, null, 2) + "\n", sha, message);
 }
+
+export interface DirectoryEntry {
+  name: string;
+  path: string;
+}
+
+/**
+ * Lists the files directly inside a directory (e.g. `clients/`) — the shard
+ * layout (§3) has one file per entity, so listing a collection means listing
+ * a directory. Returns [] if the directory doesn't exist yet (nothing saved there yet).
+ */
+export async function listDirectory(ref: RepoRef, path: string): Promise<DirectoryEntry[]> {
+  const url = `${API_BASE}/repos/${ref.owner}/${ref.repo}/contents/${path}`;
+  const response = await fetch(url, { headers: authHeaders(ref.token) });
+
+  if (response.status === 404) return [];
+  if (!response.ok) {
+    throw new GitHubApiError(`Failed to list ${path}: ${response.status}`, response.status);
+  }
+
+  const body = (await response.json()) as unknown;
+  if (!Array.isArray(body)) throw new GitHubApiError(`Expected a directory at ${path}`, response.status);
+  return (body as { name: string; path: string; type: string }[])
+    .filter((entry) => entry.type === "file" && entry.name.endsWith(".json"))
+    .map((entry) => ({ name: entry.name, path: entry.path }));
+}
